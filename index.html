@@ -33,64 +33,72 @@
 </head>
 <body class="bg-slate-100 flex items-center justify-center min-h-screen p-4">
 
-    <div class="bg-white w-full max-w-2xl p-8 rounded-2xl shadow-lg">
+    <div class="bg-white w-full max-w-3xl p-8 rounded-2xl shadow-lg">
         <!-- Header Aplikasi -->
         <div class="text-center mb-8">
-            <h1 class="text-3xl font-bold text-slate-800">Generator Tautan Undangan</h1>
-            <p class="text-slate-500 mt-2">Buat tautan untuk satu tamu atau impor dari file Excel.</p>
+            <h1 class="text-3xl font-bold text-slate-800">Generator Undangan</h1>
+            <p class="text-slate-500 mt-2">Konfigurasi, input nama, dan buat tautan undangan Anda.</p>
         </div>
 
-        <!-- Opsi 1: Form Input Nama Tunggal -->
-        <form id="guest-form" class="space-y-4">
-            <div>
-                <label for="guest-name" class="block text-sm font-medium text-slate-700 mb-1">Nama Tamu (Satu per Satu)</label>
-                <input 
-                    type="text" 
-                    id="guest-name" 
-                    name="guest-name"
-                    class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none transition-shadow"
-                    placeholder="Contoh: Bagus Adi & Keluarga"
-                >
-            </div>
-            <button 
-                type="submit"
-                class="w-full bg-blue-600 text-white font-semibold py-3 px-4 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors"
-            >
-                Buat Tautan Tunggal
-            </button>
-        </form>
-        
-        <!-- Pemisah -->
-        <div class="relative my-8">
-            <div class="absolute inset-0 flex items-center" aria-hidden="true">
-                <div class="w-full border-t border-slate-300"></div>
-            </div>
-            <div class="relative flex justify-center">
-                <span class="bg-white px-3 text-base font-medium text-slate-500">ATAU</span>
+        <!-- Bagian 1: Konfigurasi Dasar -->
+        <div class="mb-8 p-6 bg-slate-50 rounded-xl border border-slate-200">
+            <h2 class="text-xl font-bold text-slate-800 mb-4">1. Konfigurasi Dasar</h2>
+            <div class="space-y-4">
+                <div>
+                    <label for="base-url-input" class="block text-sm font-medium text-slate-700 mb-1">URL Dasar Undangan</label>
+                    <input 
+                        type="text" 
+                        id="base-url-input"
+                        class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:outline-none transition-shadow"
+                        value="https://planetcreative.my.id/rendar-rhadyta/?to="
+                    >
+                </div>
+                <div>
+                    <label for="whatsapp-template-input" class="block text-sm font-medium text-slate-700 mb-1">Template Pesan WhatsApp</label>
+                    <textarea 
+                        id="whatsapp-template-input" 
+                        rows="10"
+                        class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:outline-none transition-shadow"
+                    ></textarea>
+                    <p class="text-xs text-slate-500 mt-1">Gunakan `{nama}` untuk nama tamu dan `{link}` untuk tautan undangan.</p>
+                </div>
             </div>
         </div>
-        
-        <!-- Opsi 2: Impor dari Excel -->
+
+        <!-- Bagian 2: Buat Tautan -->
         <div>
-            <label for="file-input" class="block text-sm font-medium text-slate-700 mb-2 text-center">Impor Daftar Nama dari File Excel</label>
-            <div class="flex justify-center">
-                 <label for="excel-file" class="file-input-button">
-                    Pilih File (.xlsx, .xls, .csv)
-                </label>
-                <input 
-                    type="file" 
-                    id="excel-file" 
-                    class="hidden"
-                    accept=".xlsx, .xls, .csv"
-                >
+            <h2 class="text-xl font-bold text-slate-800 mb-4">2. Buat Tautan</h2>
+            <!-- Opsi 1: Form Input Nama Tunggal -->
+            <form id="guest-form" class="space-y-4">
+                <div class="grid sm:grid-cols-2 gap-4">
+                    <div>
+                        <label for="guest-name" class="block text-sm font-medium text-slate-700 mb-1">Nama Tamu</label>
+                        <input type="text" id="guest-name" class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none" placeholder="Contoh: Bagus Adi" required>
+                    </div>
+                     <div>
+                        <label for="guest-phone" class="block text-sm font-medium text-slate-700 mb-1">Nomor WhatsApp (Opsional)</label>
+                        <input type="tel" id="guest-phone" class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none" placeholder="Contoh: 08123456789">
+                    </div>
+                </div>
+                <button type="submit" class="w-full bg-blue-600 text-white font-semibold py-3 px-4 rounded-lg hover:bg-blue-700">Buat Tautan Tunggal</button>
+            </form>
+            
+            <div class="relative my-8"><div class="absolute inset-0 flex items-center"><div class="w-full border-t border-slate-300"></div></div><div class="relative flex justify-center"><span class="bg-white px-3 text-base font-medium text-slate-500">ATAU</span></div></div>
+            
+            <!-- Opsi 2: Impor dari Excel -->
+            <div>
+                <label for="excel-file" class="block text-sm font-medium text-slate-700 mb-2 text-center">Impor dari File Excel</label>
+                <div class="flex justify-center">
+                     <label for="excel-file" class="file-input-button">Pilih File (.xlsx, .xls, .csv)</label>
+                    <input type="file" id="excel-file" class="hidden" accept=".xlsx, .xls, .csv">
+                </div>
+                <p class="text-xs text-slate-500 text-center mt-2">Kolom A untuk **Nama**, Kolom B untuk **Nomor WA**.</p>
             </div>
-            <p class="text-xs text-slate-500 text-center mt-2">Pastikan nama-nama tamu ada di kolom pertama file Anda.</p>
         </div>
 
         <!-- Kontainer untuk menampilkan hasil -->
         <div id="results-container" class="mt-8 hidden">
             <h2 class="text-xl font-semibold text-slate-800 mb-4">Hasil Tautan:</h2>
-            <!-- Daftar tautan yang dihasilkan akan dimasukkan di sini -->
             <div id="results-list" class="space-y-3 max-h-96 overflow-y-auto pr-2"></div>
         </div>
     </div>
@@ -99,27 +107,49 @@
         // --- Elemen DOM ---
         const guestForm = document.getElementById('guest-form');
         const guestNameInput = document.getElementById('guest-name');
+        const guestPhoneInput = document.getElementById('guest-phone');
         const excelFileInput = document.getElementById('excel-file');
         const resultsContainer = document.getElementById('results-container');
         const resultsList = document.getElementById('results-list');
+        const baseUrlInput = document.getElementById('base-url-input');
+        const whatsappTemplateInput = document.getElementById('whatsapp-template-input');
 
-        // --- URL Dasar ---
-        const baseUrl = 'https://planetcreative.my.id/rendar-rhadyta/?to=';
+        // --- Template WA Default ---
+        const defaultWhatsappTemplate = `Bismillahirahmanirrahim.
+Assalamualaikum Warahmatullahi Wabarakatuh.
+
+Tanpa mengurangi rasa hormat, kami mengundang Bapak/Ibu/Saudara/i:
+*{nama}*
+
+Untuk menghadiri acara pernikahan kami:
+
+*Rendar & Rhadyta* 💍
+
+Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu.
+
+Informasi lengkap mengenai acara dapat diakses melalui tautan undangan digital di bawah ini:
+{link}
+
+Atas kehadiran dan doa restunya, kami ucapkan terima kasih. 🙏
+
+Wassalamualaikum Warahmatullahi Wabarakatuh.`;
+
+        // Isi textarea dengan template default saat halaman dimuat
+        whatsappTemplateInput.value = defaultWhatsappTemplate;
+
 
         // --- Fungsi untuk Menampilkan Hasil ---
-        function displayResults(guestNames) {
-            // Bersihkan hasil sebelumnya
+        function displayResults(guests) {
             resultsList.innerHTML = '';
-
-            // Jika tidak ada nama, jangan tampilkan apa-apa
-            if (!guestNames || guestNames.length === 0) {
+            if (!guests || guests.length === 0) {
                 resultsContainer.classList.add('hidden');
                 return;
             }
+            const baseUrl = baseUrlInput.value;
 
-            // Loop melalui setiap nama dan buat elemen HTML-nya
-            guestNames.forEach(name => {
-                if (!name) return; // Lewati baris kosong
+            guests.forEach(guest => {
+                const { name, phone } = guest;
+                if (!name) return;
 
                 const encodedGuestName = name.replace(/ /g, '+');
                 const finalUrl = baseUrl + encodedGuestName;
@@ -127,96 +157,104 @@
                 const resultItem = document.createElement('div');
                 resultItem.className = 'p-3 bg-slate-50 rounded-lg';
                 resultItem.innerHTML = `
-                    <p class="font-medium text-slate-700 text-sm mb-1">${name}</p>
-                    <div class="flex items-center space-x-2">
-                        <input type="text" readonly value="${finalUrl}" class="w-full px-3 py-2 bg-slate-200 border border-slate-300 rounded-md text-slate-600 text-sm">
-                        <button class="copy-button bg-slate-600 text-white font-semibold py-2 px-4 rounded-md hover:bg-slate-700 transition-colors text-sm">Salin</button>
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <p class="font-medium text-slate-700 text-sm">${name}</p>
+                            ${phone ? `<p class="text-xs text-slate-500">${phone}</p>` : ''}
+                        </div>
+                        <div class="flex items-center space-x-2 flex-shrink-0">
+                            <button class="copy-button bg-slate-600 text-white font-semibold p-2 rounded-md hover:bg-slate-700" title="Salin Tautan"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/><path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/></svg></button>
+                            <button class="whatsapp-button bg-green-500 text-white font-semibold p-2 rounded-md hover:bg-green-600" data-name="${name}" data-url="${finalUrl}" data-phone="${phone || ''}" title="Kirim via WhatsApp"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"/></svg></button>
+                        </div>
                     </div>
+                    <div class="mt-2"><input type="text" readonly value="${finalUrl}" class="w-full px-3 py-2 bg-slate-200 border rounded-md text-slate-600 text-sm"></div>
                     <p class="copy-notification text-green-600 text-xs mt-1 h-4"></p>
                 `;
                 resultsList.appendChild(resultItem);
             });
-
-            // Tampilkan kontainer hasil
             resultsContainer.classList.remove('hidden');
         }
 
-        // --- Fungsi untuk Menyalin Teks ---
         function copyUrlToClipboard(buttonElement) {
             const resultItem = buttonElement.closest('.p-3');
             const urlInput = resultItem.querySelector('input[type="text"]');
             const notification = resultItem.querySelector('.copy-notification');
-
             urlInput.select();
-            urlInput.setSelectionRange(0, 99999); // Kompatibilitas mobile
-
+            urlInput.setSelectionRange(0, 99999);
             try {
                 document.execCommand('copy');
                 notification.textContent = '✔️ Berhasil disalin!';
-                // Hilangkan notifikasi setelah 2 detik
-                setTimeout(() => {
-                    notification.textContent = '';
-                }, 2000);
+                setTimeout(() => { notification.textContent = ''; }, 2000);
             } catch (err) {
                 notification.textContent = 'Gagal menyalin.';
-                console.error('Gagal menyalin: ', err);
             }
         }
-        
-        // --- Event Listener untuk Tombol Salin (Menggunakan Event Delegation) ---
-        resultsList.addEventListener('click', (event) => {
-            if (event.target.classList.contains('copy-button')) {
-                copyUrlToClipboard(event.target);
+
+        function shareToWhatsApp(buttonElement) {
+            const guestName = buttonElement.dataset.name;
+            const url = buttonElement.dataset.url;
+            const phone = buttonElement.dataset.phone;
+            const template = whatsappTemplateInput.value;
+            
+            const message = template.replace(/{nama}/g, guestName).replace(/{link}/g, url);
+            const encodedMessage = encodeURIComponent(message);
+            let whatsappUrl;
+
+            if (phone) {
+                let cleanedPhone = phone.toString().replace(/\D/g, '');
+                if (cleanedPhone.startsWith('0')) {
+                    cleanedPhone = '62' + cleanedPhone.substring(1);
+                }
+                whatsappUrl = `https://wa.me/${cleanedPhone}?text=${encodedMessage}`;
+            } else {
+                whatsappUrl = `https://wa.me/?text=${encodedMessage}`;
             }
+            window.open(whatsappUrl, '_blank');
+        }
+        
+        resultsList.addEventListener('click', (event) => {
+            const button = event.target.closest('button');
+            if (!button) return;
+            if (button.classList.contains('copy-button')) copyUrlToClipboard(button);
+            if (button.classList.contains('whatsapp-button')) shareToWhatsApp(button);
         });
 
-        // --- Event Listener untuk Form Tunggal ---
         guestForm.addEventListener('submit', (event) => {
             event.preventDefault();
             const guestName = guestNameInput.value.trim();
+            const guestPhone = guestPhoneInput.value.trim();
             if (guestName) {
-                displayResults([guestName]);
-                guestNameInput.value = ''; // Kosongkan input setelah submit
+                displayResults([{ name: guestName, phone: guestPhone }]);
+                guestNameInput.value = '';
+                guestPhoneInput.value = '';
             } else {
                  resultsContainer.classList.add('hidden');
             }
         });
 
-        // --- Event Listener untuk Upload File Excel ---
         excelFileInput.addEventListener('change', (event) => {
             const file = event.target.files[0];
             if (!file) return;
-
             const reader = new FileReader();
             reader.onload = (e) => {
-                const data = new Uint8Array(e.target.result);
-                const workbook = XLSX.read(data, { type: 'array' });
-                
-                // Ambil sheet pertama
-                const firstSheetName = workbook.SheetNames[0];
-                const worksheet = workbook.Sheets[firstSheetName];
-                
-                // Konversi ke array of arrays (mengabaikan header)
-                const jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
-                
-                // Ambil nama dari kolom pertama (index 0) di setiap baris
-                const guestNames = jsonData.map(row => row[0]).filter(name => name); // filter untuk menghapus nama kosong
-                
-                displayResults(guestNames);
+                try {
+                    const data = new Uint8Array(e.target.result);
+                    const workbook = XLSX.read(data, { type: 'array' });
+                    const firstSheetName = workbook.SheetNames[0];
+                    const worksheet = workbook.Sheets[firstSheetName];
+                    const jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
+                    const guests = jsonData.map(row => ({ name: row[0], phone: row[1] })).filter(guest => guest.name);
+                    displayResults(guests);
+                } catch (error) {
+                    console.error("Error processing Excel file:", error);
+                    alert("Gagal memproses file. Pastikan formatnya benar.");
+                }
             };
-            
-            reader.onerror = (err) => {
-                console.error("File reading error:", err);
-                alert("Gagal membaca file.");
-            };
-
+            reader.onerror = () => { alert("Gagal membaca file."); };
             reader.readAsArrayBuffer(file);
-            
-            // Reset input file agar bisa memilih file yang sama lagi
             event.target.value = '';
         });
     </script>
 </body>
 </html>
-
 
